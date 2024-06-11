@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,18 +32,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.viewHold
         HistoryModel model = historyModelArrayList.get(position);
         holder.cat_Name.setText(model.getCat_Name());
         holder.type.setText(model.getPayment_method());
-        holder.amount.setText(model.getAmount());
+        holder.amount.setText(String.valueOf(model.getAmount()));
         holder.date.setText(model.getDate());
 
         // Determine the amount color based on positive or negative value
         try {
-            int amount = Integer.parseInt(model.getAmount());
-            if (amount > 0) {
-                holder.amount.setTextColor(Color.GREEN);
+            if (model.getAmount() > 0) {
+                holder.amount.setTextColor(Color.parseColor("#008105"));
             } else {
-                holder.amount.setTextColor(Color.RED);
+                holder.amount.setTextColor(Color.parseColor("#BF1B0F"));
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             // Handle the case where the amount is not a valid integer
             holder.amount.setTextColor(Color.BLACK); // Default color
         }
